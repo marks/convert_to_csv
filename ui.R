@@ -1,4 +1,5 @@
-shinyUI(pageWithSidebar(
+shinyUI(fluidPage(
+  tags$head(includeScript("google-analytics.js")),
   headerPanel("Convert DBF, SAS, SPSS, and Stata files to CSV"),
   sidebarPanel(
     helpText("Note: Only .dbf, .sas7bdat, .dta, .sav, and .csv files are supported right now"),
