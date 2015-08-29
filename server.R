@@ -1,6 +1,8 @@
 library(shiny)
-library(foreign)
-library(sas7bdat)
+library(foreign) # Stata and SPSS
+library(sas7bdat) # SAS
+
+options(shiny.maxRequestSize=30*1024^2) # via http://stackoverflow.com/a/18037912/252671
 
 shinyServer(function(input, output) {
 
@@ -11,18 +13,23 @@ shinyServer(function(input, output) {
     }
     else {
       if(input$type == "CSV"){
-        # for CSV files
         data <- read.csv(inFile$datapath) 
       }
       else if(input$type == "Stata"){
         # for Stata files up to v12
         data <- read.dta(inFile$datapath) 
-        # TODO Stata v13
+        # TODO Stata >v13
       }
       else if(input$type == "SAS"){
-        # for SAS
         data <- read.sas7bdat(inFile$datapath)
-      } else {
+      }
+      else if(input$type == "DBF"){
+        data <- read.dbf(inFile$datapath)
+      }
+      else if(input$type == "SPSS"){
+        data <- read.spss(inFile$datapath,to.data.frame=TRUE)
+      }
+      else {
         return(NULL)
       }
 

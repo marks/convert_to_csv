@@ -1,10 +1,10 @@
 shinyUI(pageWithSidebar(
-  headerPanel("Convert Stata (.dta) and SAS (.sas7bdat) files to CSV"),
+  headerPanel("Convert DBF, SAS, SPSS, and Stata files to CSV"),
   sidebarPanel(
+    helpText("Note: Only .dbf, .sas7bdat, .dta, .sav, and .csv files are supported right now"),
     selectInput("type", "1. Choose format", 
-              choices = c("Stata", "SAS", "CSV")),
+              choices = c("DBF","SAS","SPSS", "Stata", "CSV")),
     fileInput('file1', '2. Choose file'),
-              # accept=c('text/csv', 'text/comma-separated-values,text/plain', '.csv')),
     tags$hr(),
     uiOutput('downloadButton')
   ),
